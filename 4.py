@@ -1,55 +1,50 @@
-
-
-def is_safe(board, row, col, n):
-    # Check column
-    for i in range(row):
-        if board[i][col] == 1:
+def issafe(arr,x,y,n):
+    for row in range(x):
+        if arr[row][y] ==1:
+            # Checking column attack
             return False
-
-    # Check left diagonal
-    i, j = row-1, col-1
-    while i >= 0 and j >= 0:
-        if board[i][j] == 1:
+    row = x
+    col = y
+    #Checking Diagonal Attack
+    while row>=0 and col>=0:
+        if arr[row][col]==1:
             return False
-        i -= 1
-        j -= 1
+        row-=1
+        col-=1
 
-    # Check right diagonal
-    i, j = row-1, col+1
-    while i >= 0 and j < n:
-        if board[i][j] == 1:
+    row = x
+    col = y
+    #Checking Anti Diagonal Attack
+    while row>=0 and col<n:
+        if arr[row][col]==1:
             return False
-        i -= 1
-        j += 1
+        row-=1
+        col+=1
 
     return True
 
-
-def solve_nqueens(board, row, n):
-    if row == n:
+def nQueen(arr,x,n):
+    if x>=n:
         return True
 
     for col in range(n):
-        if is_safe(board, row, col, n):
-            board[row][col] = 1
-
-            if solve_nqueens(board, row + 1, n):
+        if issafe(arr,x,col,n):
+            arr[x][col]=1
+            if nQueen(arr,x+1,n):
                 return True
-
-            board[row][col] = 0
+            arr[x][col] = 0
 
     return False
 
+def main():
+    n = int(input("Enter number of Queens : "))
+    arr = [[0]*n for i in range(n)]
 
+    if nQueen(arr,0,n):
+        for i in range(n):
+            for j in range(n):
+                print(arr[i][j],end=" ")
+            print()
 
-n = 4
-board = [[0]*n for _ in range(n)]
-
-if solve_nqueens(board, 0, n):
-    print("Solution:")
-    for row in board:
-        print(row)
-else:
-    print("No solution exists")
-
-
+if __name__ == '__main__':
+    main()
