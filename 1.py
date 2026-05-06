@@ -1,4 +1,4 @@
-# Undirected Graph using adjacency list
+
 graph = {
     'A': ['B', 'C'],
     'B': ['A', 'D', 'E'],
@@ -49,14 +49,10 @@ def bfs_all(graph):
             bfs(graph, node, visited)
 
 
-# ---------------- Main ----------------
+
 print("DFS Traversal (All Vertices):")
 dfs_all(graph)
 
 print("\nBFS Traversal (All Vertices):")
 bfs_all(graph)
 
-#A–B, A–C
-#B–D, B–E
-#C–F
-#E–F
